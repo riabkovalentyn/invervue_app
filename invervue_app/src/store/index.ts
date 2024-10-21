@@ -14,12 +14,17 @@ export default createStore({
     totalSteps: 3,
   },
     mutations: {
-    updateForm(state, formData: FormData) {
-      state.formData = {...state.formData, ...formData};
-    },
-    nextStep(state) {
-      if(state.currentStep < state.totalSteps) {
-        state.currentStep++;
+      updateForm(state, formData: FormData) {
+        state.formData = {...state.formData, ...formData};
+      },
+      nextStep(state) {
+        if(state.currentStep < state.totalSteps) {
+          state.currentStep++;
+        }
+      },
+      previusStep(state){
+        if(state.currentStep > 1) {
+          state.currentStep--;
       }
     },
   },

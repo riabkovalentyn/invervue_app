@@ -15,7 +15,7 @@
     import { useStore } from 'vuex';
     import InputField from '../InputField.vue';
     import CheckboxField from '../CheckboxField.vue';
-    import { FormData } from '../../types';
+    import { FormData } from '../../types.ts';
 
     export default defineComponent({
         components: {

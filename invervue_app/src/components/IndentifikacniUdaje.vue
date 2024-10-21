@@ -13,7 +13,7 @@
     import { defineComponent, toRefs } from 'vue';
     import { useStore } from 'vuex';
     import InputField from '@/components/InputField.vue';
-    import { FormData } from '@/types';
+    import { FormData } from '../types/types.ts';
 
     export default defineComponent({
         components: {
