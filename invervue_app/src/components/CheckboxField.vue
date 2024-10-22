@@ -3,14 +3,13 @@
         <label>
             <input 
             type="checkbox" 
-            :checked="checked" 
-            @change="$emit('update:modelValue', $event.target.checked)"
+            :checked="modelValue"
+            @change="onCheckboxChange"
             :required="required"
             />
             {{ label }}
         </label>
     </div>
-
 </template>
 
 <script lang="ts">
@@ -32,7 +31,12 @@ export default defineComponent({
             default: false
         },
     },
-    emits: ['update:modelValue']
+    emits: ['update:modelValue'],
+    methods: {
+        onCheckboxChange(event: Event) {
+            const target = event.target as HTMLInputElement
+            this.$emit('update:modelValue', target.checked)
+        }
+    }
 })
-
 </script>

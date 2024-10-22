@@ -3,19 +3,20 @@ import { FormData } from '@/types/types'
 
 
 export interface State {
+  formData: FormData;
   currentStep: number;
   totalSteps: number;
 }
 
-export default createStore({
+export default createStore<State>({
   state:{
     formData: {} as FormData,
     currentStep: 1,
     totalSteps: 3,
   },
     mutations: {
-      updateForm(state, formData: FormData) {
-        state.formData = {...state.formData, ...formData};
+      updateFormData(state, payload: Partial<FormData>) {
+        state.formData = {...state.formData, ...payload};
       },
       nextStep(state) {
         if(state.currentStep < state.totalSteps) {
@@ -29,6 +30,7 @@ export default createStore({
     },
   },
   getters: {
+    formData: (state) => state.formData,
     isLastStep: (state) => {
       return state.currentStep === state.totalSteps;
     },

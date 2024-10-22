@@ -2,56 +2,34 @@
     <div>
         <div v-if="currentStep === 1">
             <OsobniUdaje />
-            <NavigationButtons 
-            :currentStep="currentStep"
-            :totalSteps="3"
-            @nextStep="nextStep"
-            @previousStep="previousStep"
-            @submitForm="submitForm"
-            />
         </div>
-        <div>
+        <div v-if="currentStep === 2">
             <IndentifikacniUdaje />
-            <NavigationButtons 
-            :currentStep="currentStep"
-            :totalSteps="3"
-            @nextStep="nextStep"
-            @previousStep="previousStep"
-            @submitForm="submitForm"
-            />
         </div>
-        <div>
+        <div v-if="currentStep === 3">
             <FinancniUdaje />
-            <NavigationButtons 
-            :currentStep="currentStep"
-            :totalSteps="3"
-            @nextStep="nextStep"
-            @previousStep="previousStep"
-            @submitForm="submitForm"
-            />
         </div>
-        <div>
+        <div v-if="currentStep === 4">
             <InvestmentAmount />
-            <NavigationButtons 
-            :currentStep="currentStep"
-            :totalSteps="3"
-            @nextStep="nextStep"
-            @previousStep="previousStep"
-            @submitForm="submitForm"
-            />
         </div>
         <button @click="submitForm">Submit</button>
     </div>
-
-
+    <NavigationButtons 
+            :currentStep="currentStep"
+            :totalSteps="4" 
+            @nextStep="nextStep"
+            @previousStep="prevStep"
+            @submitForm="submitForm"
+        />
+        <button @click="submitForm" v-if="currentStep === 4">Submit</button>
 </template>
 
 <script lang="ts">
-import OsobniUdaje from './OsobniUdaje.vue';
-import IndentifikacniUdaje from './IndentifikacniUdaje.vue';
-import FinancniUdaje from './FinancniUdaje.vue';
-import InvestmentAmount from './InvestmentAmount.vue';
-import NavigationButtons from './NavigationButtons.vue';
+import OsobniUdaje from '../components/OsobniUdaje.vue';
+import IndentifikacniUdaje from '../components/IndentifikacniUdaje.vue';
+import FinancniUdaje from '../components/FinancniUdaje.vue';
+import InvestmentAmount from '../components/InvestmentAmount.vue';
+import NavigationButtons from '../components/NavigationButtons.vue';
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 

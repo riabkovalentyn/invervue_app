@@ -1,25 +1,32 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import InvestmentForm from '../views/InvestmentForm.vue';
+import InvestedSummary from '../views/InvestedSummary.vue';
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Form',
+    component: InvestmentForm,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: '/summary',
+    name: 'InvestedSummary',
+    component: InvestedSummary,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+
+router.beforeEach((to, formData) => {
+
+  if (to.name === 'Summary' && !localStorage.getItem('investorData')) {
+ 
+    return { name: 'Form' };
+  }
+});
+
+export default router;

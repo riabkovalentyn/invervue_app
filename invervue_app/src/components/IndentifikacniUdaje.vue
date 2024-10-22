@@ -1,19 +1,19 @@
 <template>
     <div>
         <h2>Krok 2: Identifikační údaje</h2>
-        <InputField label="Rodne Cislo" v-model="form.birthNuber" placeholder="Rodne Cislo" required />
-        <InputField label="Datum narozeni" v-model="form.dateOfBirth" placeholder="Datum Narozeni" required />
-        <InputField label="Cislo Obcanskeho Prokazu" v-model="form.idCardNumber" placeholder="Rodne Cislo" required />
+        <InputField label="Rodne Cislo" v-model="formData.birthNumber" placeholder="Rodne Cislo" required />
+        <InputField label="Datum narozeni" v-model="formData.dateOfBirth" placeholder="Datum Narozeni" required />
+        <InputField label="Cislo Obcanskeho Prokazu" v-model="formData.idCardNumber" placeholder="Rodne Cislo" required />
 
     </div>
 
 </template>
 
 <script lang="ts">
-    import { defineComponent, toRefs } from 'vue';
+    import { defineComponent,  } from 'vue';
     import { useStore } from 'vuex';
     import InputField from '@/components/InputField.vue';
-    import { FormData } from '../types/types.ts';
+    import { FormData } from '../types/types';
 
     export default defineComponent({
         components: {
@@ -23,7 +23,7 @@
             const store = useStore();
             const formData = store.state.formData as FormData;
             return { 
-                ...toRefs(formData),
+                formData,
              };
         },
     });

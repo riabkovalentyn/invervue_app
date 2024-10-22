@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import InvestmentForm from './components/InvestmentForm.vue';
+import InvestmentForm from './views/InvestmentForm.vue';
 import { defineComponent } from 'vue';
 
 

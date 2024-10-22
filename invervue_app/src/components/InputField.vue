@@ -2,10 +2,10 @@
     <div class="input-field">
         <label>{{ label }}</label>
         <input 
-            :type="text" 
+            :type="type" 
             :placeholder="placeholder" 
-            :modelValue="modelValue" 
-            @input = "$emit('update:modelValue', $event.target.value)"
+            :value="modelValue" 
+            @input = "onInputChange"
             :required="required" 
             />
         </div>
@@ -39,5 +39,11 @@ export default defineComponent({
         },
     },
     emits: ['update:modelValue'],
+    methods: {
+        onInputChange(event: Event) {
+            const target = event.target as HTMLInputElement;
+            this.$emit('update:modelValue', target.value);
+        }
+    }
 });
 </script>
