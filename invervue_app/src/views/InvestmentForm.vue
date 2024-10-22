@@ -1,7 +1,11 @@
 <template>  
     <div>
+        <component :is="currentComponent" />
+        
+        <!--
+    
         <div v-if="currentStep === 1">
-            <OsobniUdaje />
+        <OsobniUdaje />
         </div>
         <div v-if="currentStep === 2">
             <IndentifikacniUdaje />
@@ -12,7 +16,7 @@
         <div v-if="currentStep === 4">
             <InvestmentAmount />
         </div>
-        <button @click="submitForm">Submit</button>
+        -->
         <NavigationButtons 
         :currentStep="currentStep"
         :totalSteps="4" 
@@ -45,6 +49,21 @@ export default defineComponent({
         const store = useStore();
         const currentStep = ref(1);
 
+        const currentComponent = computed(() => {
+            switch (currentStep.value) {
+                case 1:
+                    return OsobniUdaje;
+                case 2:
+                    return IndentifikacniUdaje;
+                case 3:
+                    return FinancniUdaje;
+                case 4:
+                    return InvestmentAmount;
+                default:
+                    return OsobniUdaje;
+            }
+        });
+
         const nextStep = () => {
             if(currentStep.value < 4){
                 return currentStep.value +=1;
@@ -68,6 +87,7 @@ export default defineComponent({
         return {
             formData: computed(() => store.getters.form),
             currentStep,
+            currentComponent,
             nextStep,
             prevStep,
             submitForm,

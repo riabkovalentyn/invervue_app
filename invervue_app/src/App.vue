@@ -2,7 +2,7 @@
   <div id="app">
     <InvestmentForm />
   </div>
-  <router-view/>
+  
 </template>
 
 <script lang="ts">
