@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="navigation-buttons">
         <button @click="previousStep" v-if="currentStep > 1">Previous</button>
         <button @click="nextStep" v-if="currentStep < totalSteps">Next</button>
         <button @click="submitForm" v-if="currentStep === totalSteps">Submit</button>

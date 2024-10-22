@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="financni-udaje">
         <h2>
             Krok 3: Finanční údaje
         </h2>
@@ -34,7 +34,7 @@
 </script>
 
 <style lang="scss" scoped>
-.indentifikacni-udaje {
+.financni-udaje {
   margin: 20px;
   h2 {
     color: #2c3e50;

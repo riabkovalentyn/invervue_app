@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="indentifikacni-udaje">
         <h2>Krok 2: Identifikační údaje</h2>
         <InputField label="Rodne Cislo" v-model="formData.birthNumber" placeholder="Rodne Cislo" required />
         <InputField label="Datum narozeni" v-model="formData.dateOfBirth" placeholder="Datum Narozeni" required />

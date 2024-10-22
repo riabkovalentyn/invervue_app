@@ -1,22 +1,6 @@
 <template>  
-    <div>
+    <div class="form">
         <component :is="currentComponent" />
-        
-        <!--
-    
-        <div v-if="currentStep === 1">
-        <OsobniUdaje />
-        </div>
-        <div v-if="currentStep === 2">
-            <IndentifikacniUdaje />
-        </div>
-        <div v-if="currentStep === 3">
-            <FinancniUdaje />
-        </div>
-        <div v-if="currentStep === 4">
-            <InvestmentAmount />
-        </div>
-        -->
         <NavigationButtons 
         :currentStep="currentStep"
         :totalSteps="4" 
@@ -94,8 +78,4 @@ export default defineComponent({
         };
     },
 });
-
-
-
-
 </script>

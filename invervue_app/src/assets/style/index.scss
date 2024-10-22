@@ -1,0 +1,33 @@
+
+@media (max-width: 768px) {
+    .app {
+      padding: 10px;
+      font-size: 14px;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+    }
+  
+    .form-field {
+      width: 100%;
+    }
+  
+    .navigation-buttons {
+      flex-direction: column;
+      button {
+        margin-bottom: 10px;
+      }
+    }
+    .form {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
