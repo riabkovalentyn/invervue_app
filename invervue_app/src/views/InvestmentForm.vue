@@ -13,15 +13,15 @@
             <InvestmentAmount />
         </div>
         <button @click="submitForm">Submit</button>
-    </div>
-    <NavigationButtons 
-            :currentStep="currentStep"
-            :totalSteps="4" 
-            @nextStep="nextStep"
-            @previousStep="prevStep"
-            @submitForm="submitForm"
+        <NavigationButtons 
+        :currentStep="currentStep"
+        :totalSteps="4" 
+        @nextStep="nextStep"
+        @previousStep="prevStep"
+        @submitForm="submitForm"
         />
         <button @click="submitForm" v-if="currentStep === 4">Submit</button>
+    </div>
 </template>
 
 <script lang="ts">
@@ -30,7 +30,7 @@ import IndentifikacniUdaje from '../components/IndentifikacniUdaje.vue';
 import FinancniUdaje from '../components/FinancniUdaje.vue';
 import InvestmentAmount from '../components/InvestmentAmount.vue';
 import NavigationButtons from '../components/NavigationButtons.vue';
-import { defineComponent, computed } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
@@ -43,12 +43,20 @@ export default defineComponent({
     },
     setup() {
         const store = useStore();
+        const currentStep = ref(1);
 
         const nextStep = () => {
-            store.commit('nextStep');
+            if(currentStep.value < 4){
+                return currentStep.value +=1;
+
+            }
+             else store.commit('nextStep');
         };
 
         const prevStep = () => {
+            if(currentStep.value > 1){
+                return currentStep.value -= 1;
+            }else store.commit('prevStep');
             store.commit('prevStep');
         };
 
@@ -56,10 +64,10 @@ export default defineComponent({
             store.commit('nextStep');
             alert('Formular odeslan');
         };
-
+        
         return {
             formData: computed(() => store.getters.form),
-            currentStep: computed(() => store.getters.currentStep),
+            currentStep,
             nextStep,
             prevStep,
             submitForm,

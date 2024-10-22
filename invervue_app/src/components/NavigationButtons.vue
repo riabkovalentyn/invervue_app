@@ -46,3 +46,22 @@
     })
 
 </script>
+
+<style lang="scss" scoped>
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
+}
+</style>

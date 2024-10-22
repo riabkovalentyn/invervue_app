@@ -32,3 +32,13 @@ export default defineComponent({
 
 })
 </script>
+
+
+<style lang="scss" scoped>
+.osobni-udaje {
+  margin: 20px;
+  h2 {
+    color: #2c3e50;
+  }
+}
+</style>

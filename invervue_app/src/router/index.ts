@@ -23,7 +23,7 @@ const router = createRouter({
 
 router.beforeEach((to, formData) => {
 
-  if (to.name === 'Summary' && !localStorage.getItem('investorData')) {
+  if (to.name === 'InvestedSummary' && !localStorage.getItem('investorData')) {
  
     return { name: 'Form' };
   }

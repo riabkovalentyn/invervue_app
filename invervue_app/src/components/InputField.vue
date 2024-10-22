@@ -26,7 +26,7 @@ export default defineComponent({
             required: true
         },
         type: {
-            type: String as PropType<'text' | 'email' | 'number' | 'date'>, 
+            type: String as PropType<'text' | 'email' | 'number' | 'date' | 'address'| 'bankAccountNumber'>, 
             default: 'text'
         },
         placeholder: {
