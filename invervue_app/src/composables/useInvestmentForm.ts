@@ -1,9 +1,10 @@
 import { reactive } from "vue";
-import { FormData } from "@/types/types";
+import { FormErrors, FormData } from "@/types/types";
+import { validateForm as runValidation } from "@/types/validation";
 
 export const useInvestmentForm = () => {
     const formData = reactive<FormData>({
-        investmentAmount: 0,
+        investmentAmount: "0",
         firstName: "",
         lastName: "",
         email: "",
@@ -17,9 +18,12 @@ export const useInvestmentForm = () => {
     
     });
 
-    const validateForm = (): boolean => {
-        return !!(formData.firstName && formData.lastName && formData.email && formData.consent);
+    const errors = reactive<FormErrors>({});
+
+    const validateForm = () => {
+        const validationErrors = runValidation(formData);
+        Object.assign(formData, validationErrors);
     };
 
-    return { formData, validateForm };
+    return { formData, errors, validateForm };
 };

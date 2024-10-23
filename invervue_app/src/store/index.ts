@@ -6,6 +6,7 @@ export interface State {
   formData: FormData;
   currentStep: number;
   totalSteps: number;
+  consent: boolean;
 }
 
 export default createStore<State>({
@@ -13,6 +14,7 @@ export default createStore<State>({
     formData: {} as FormData,
     currentStep: 1,
     totalSteps: 3,
+    consent: false,
   },
     mutations: {
       updateFormData(state, payload: Partial<FormData>) {
@@ -28,7 +30,10 @@ export default createStore<State>({
           state.currentStep--;
       }
     },
-  },
+    setConsent(state, consent){
+      state.formData.consent = consent;
+    },
+   },
   getters: {
     formData: (state) => state.formData,
     isLastStep: (state) => {

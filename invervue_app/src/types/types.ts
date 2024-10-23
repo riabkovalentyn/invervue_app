@@ -1,5 +1,5 @@
 export interface FormData {
-  investmentAmount: number;
+  investmentAmount: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -12,7 +12,7 @@ export interface FormData {
   consent: boolean;
   }
 export interface FormErrors {
-  investmentAmount?: number;
+  investmentAmount?: string;
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;

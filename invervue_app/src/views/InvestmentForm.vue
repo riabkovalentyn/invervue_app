@@ -3,12 +3,12 @@
         <component :is="currentComponent" />
         <NavigationButtons 
         :currentStep="currentStep"
-        :totalSteps="4" 
+        :totalSteps="5" 
         @nextStep="nextStep"
         @previousStep="prevStep"
         @submitForm="submitForm"
         />
-        <button @click="submitForm" v-if="currentStep === 4">Submit</button>
+        
     </div>
 </template>
 
@@ -20,6 +20,7 @@ import InvestmentAmount from '../components/InvestmentAmount.vue';
 import NavigationButtons from '../components/NavigationButtons.vue';
 import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
+import InvestedSummary from './InvestedSummary.vue';
 
 export default defineComponent({
     components: {
@@ -28,10 +29,14 @@ export default defineComponent({
         FinancniUdaje,
         InvestmentAmount,
         NavigationButtons,
+        InvestedSummary
     },
     setup() {
         const store = useStore();
         const currentStep = ref(1);
+
+        const formData = computed(() => store.getters.form);
+
 
         const currentComponent = computed(() => {
             switch (currentStep.value) {
@@ -43,15 +48,22 @@ export default defineComponent({
                     return FinancniUdaje;
                 case 4:
                     return InvestmentAmount;
+                case 5:
+                    return InvestedSummary    
                 default:
                     return OsobniUdaje;
             }
         });
 
         const nextStep = () => {
-            if(currentStep.value < 4){
+            if(currentStep.value === 3){
+                   if(formData.value &&!formData.value.consent){
+                    alert("You must agree to the terms to proceed.");
+                    return;
+                   }
+               }
+            if(currentStep.value < 5){
                 return currentStep.value +=1;
-
             }
              else store.commit('nextStep');
         };
