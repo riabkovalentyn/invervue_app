@@ -13,7 +13,7 @@ export default createStore<State>({
   state:{
     formData: {} as FormData,
     currentStep: 1,
-    totalSteps: 3,
+    totalSteps: 5,
     consent: false,
   },
     mutations: {

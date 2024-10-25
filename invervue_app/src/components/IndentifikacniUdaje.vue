@@ -4,13 +4,11 @@
         <InputField label="Rodne Cislo" v-model="formData.birthNumber" placeholder="Rodne Cislo" required />
         <InputField label="Datum narozeni" v-model="formData.dateOfBirth" placeholder="Datum Narozeni" required />
         <InputField label="Cislo Obcanskeho Prokazu" v-model="formData.idCardNumber" placeholder="Rodne Cislo" required />
-
     </div>
-
 </template>
 
 <script lang="ts">
-    import { defineComponent,  } from 'vue';
+    import { defineComponent,  computed } from 'vue';
     import { useStore } from 'vuex';
     import InputField from '@/components/InputField.vue';
     import { FormData } from '../types/types';
@@ -22,9 +20,16 @@
         setup() {
             const store = useStore();
             const formData = store.state.formData as FormData;
+            const consent = computed({
+               get: () => store.getters.form.consent,
+               set: (value: boolean) => store.commit('updateForm', { key: 'consent', value }),
+                   });
             return { 
                 formData,
+                consent
              };
+
+                    
         },
     });
 

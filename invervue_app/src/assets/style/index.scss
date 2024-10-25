@@ -1,3 +1,33 @@
+.app{
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 100vh; 
+}
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  background-color: #f8fafb;
+  padding: 20px;
+  .component{
+    background-color: white;
+    max-width: 1400px; 
+    width: 100%;
+    padding: 30px;
+    border-radius: 12px; 
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+      }
+      h2{
+        font-size: 1.5rem;
+     color: #333;
+      margin-bottom: 20px;
+      }
+    }
 
 @media (max-width: 768px) {
     .app {
@@ -27,6 +57,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
+      flex-wrap: wrap;
       gap: 15px;
     }
   }

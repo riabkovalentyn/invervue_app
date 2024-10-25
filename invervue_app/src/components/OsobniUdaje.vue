@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import InputField from '../components/InputField.vue'
 import { FormData } from '../types/types';

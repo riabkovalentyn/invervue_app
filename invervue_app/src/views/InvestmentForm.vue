@@ -1,6 +1,6 @@
 <template>  
-    <div class="form">
-        <component :is="currentComponent" />
+    <div class="form-container">
+        <component class="component"  :is="currentComponent" />
         <NavigationButtons 
         :currentStep="currentStep"
         :totalSteps="5" 
@@ -56,12 +56,7 @@ export default defineComponent({
         });
 
         const nextStep = () => {
-            if(currentStep.value === 3){
-                   if(formData.value &&!formData.value.consent){
-                    alert("You must agree to the terms to proceed.");
-                    return;
-                   }
-               }
+            
             if(currentStep.value < 5){
                 return currentStep.value +=1;
             }
@@ -91,3 +86,7 @@ export default defineComponent({
     },
 });
 </script>
+
+<style lang="scss">
+@import "../assets/style/index.scss";
+</style>

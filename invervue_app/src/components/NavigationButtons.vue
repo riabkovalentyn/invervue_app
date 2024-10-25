@@ -1,7 +1,13 @@
 <template>
+    <div v-if="currentStep === 3">
+        <label>
+            <input type="checkbox" v-model="isChecked" name="" id="">
+            <span>Souhlas se zpracovanim osobnich udaju </span>
+        </label>    
+        </div>
     <div class="navigation-buttons">
         <button @click="previousStep" v-if="currentStep > 1">Previous</button>
-        <button @click="nextStep" v-if="currentStep < totalSteps">Next</button>
+        <button @click="nextStep" :disabled="currentStep === 3 && !isChecked" v-if="currentStep < totalSteps">Next</button>
         <button @click="submitForm" v-if="currentStep === totalSteps">Submit</button>
 
     </div>
@@ -11,9 +17,11 @@
 
 
 <script lang="ts">
-    import { defineComponent } from 'vue';
+    import { defineComponent, ref } from 'vue';
 
     export default defineComponent({
+            
+
             props: {
                 currentStep: {
                     type: Number,
@@ -25,8 +33,13 @@
                 },
             },
             emits: ['nextStep', 'previousStep','submitForm'],
-            setup(_, { emit }) {
+            setup(props, { emit }) {
+                const isChecked = ref(false);
                 const nextStep = () => {
+                    if(props.currentStep === 3 && !isChecked.value){
+                        alert('You must agree with the privacy policy before proceeding.');
+                        return;
+                    }
                     emit('nextStep');
                 };
                 const previousStep = () => {
@@ -36,6 +49,7 @@
                     emit('submitForm');
                 };
             return {
+                    isChecked,
                     nextStep,
                     previousStep,
                     submitForm,

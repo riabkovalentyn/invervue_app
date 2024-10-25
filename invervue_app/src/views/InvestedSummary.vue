@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="summary">
       <h1>Summary</h1>
       <div v-if="formData">
         <h2>Your Submitted Data:</h2>

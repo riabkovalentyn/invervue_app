@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app" id="app">
     <InvestmentForm />
   </div>
   
@@ -20,6 +20,4 @@ export default defineComponent({
 
 <style lang="scss">
 @import "@/assets/style/index.scss";
-
-
 </style>
