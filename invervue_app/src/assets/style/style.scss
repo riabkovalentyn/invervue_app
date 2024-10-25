@@ -1,8 +1,9 @@
 .input-field{
     display: flex;
     align-items: center ;
+    
    input{
-    flex: 1;
+    flex: 0 0 150px;
     margin: 0 0 10px  10px;
     background-color: #F8F4E3;
     font-weight: bold;
@@ -21,14 +22,72 @@
     color: #F8F4E3;
     font-weight: bold;
     text-align: right;
+    padding-bottom: 9px;
+    box-sizing: nowrap;
     } 
 }
 
 
-.osobni-udaje{
-   h2{
-    margin-left: 550px;
-   } 
-   
-
+.osobni-udaje, .investment-amount, .indentifikacni-udaje, .summary, .financni-udaje{
+    h2{
+        text-align: center;
+        color: #F8F4E3 ;
+    }
 }
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    gap: 20px;
+    button {
+      width: 150px;  
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #2980b9;
+      }
+    }
+  }
+
+.custom-checkbox{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    input[type="checkbox"]{
+        display: none;
+    }
+    label{
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        &::before{
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007bbf;
+            border-radius: 3px;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: backgroung-color 0.3 , border-color 0.3s;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #007bbf;
+            border-color: #007bbf;
+            color: white;
+            content: "✓";            
+            text-align: center;
+            line-height: 20px;
+            font-size: 16px;
+        }
+        }
+    }
+  

@@ -1,8 +1,8 @@
 <template>
-    <div v-if="currentStep === 3">
+    <div class="custom-checkbox" v-if="currentStep === 3">
         <label>
-            <input type="checkbox" v-model="isChecked" name="" id="">
-            <span>Souhlas se zpracovanim osobnich udaju </span>
+            <input type="checkbox" v-model="isChecked" name="" id="customCheckbox">
+            <span for="customCheckbox">Souhlas se zpracovanim osobnich udaju </span>
         </label>    
         </div>
     <div class="navigation-buttons">
@@ -62,20 +62,5 @@
 </script>
 
 <style lang="scss" scoped>
-.navigation-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  button {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      background-color: #2980b9;
-    }
-  }
-}
+@import '../assets/style/style.scss'
 </style>

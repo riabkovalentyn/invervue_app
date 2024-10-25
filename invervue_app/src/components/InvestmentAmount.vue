@@ -19,11 +19,6 @@
   </script>
   
   <style lang="scss" scoped>
-  .investment-amount {
-    margin: 20px;
-    h2 {
-      color: #2c3e50;
-    }
-  }
+  @import '../assets/style/style.scss'
   </style>
   

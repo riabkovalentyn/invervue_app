@@ -36,10 +36,5 @@
 </script>
 
 <style lang="scss" scoped>
-.indentifikacni-udaje {
-  margin: 20px;
-  h2 {
-    color: #2c3e50;
-  }
-}
+@import '../assets/style/style.scss'
 </style>
