@@ -35,10 +35,6 @@ export default defineComponent({
 
 
 <style lang="scss" scoped>
-.osobni-udaje {
-  margin: 20px;
-  h2 {
-    color: #2a6096;
-  }
-}
+@import '../assets/style/style.scss'
+
 </style>

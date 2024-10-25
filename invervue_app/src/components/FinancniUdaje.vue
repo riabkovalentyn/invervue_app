@@ -18,7 +18,6 @@
     export default defineComponent({
         components: {
             InputField,
-            
         },
         setup() {
             const store = useStore();
