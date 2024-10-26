@@ -60,6 +60,7 @@
     cursor: pointer;
     input[type="checkbox"]{
         display: none;
+        
     }
     label{
         position: relative;
@@ -79,15 +80,20 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             transition: backgroung-color 0.3 , border-color 0.3s;
         }
-        input[type="checkbox"]:checked {
+        input[type="checkbox"]:checked + &::before{
             background-color: #007bbf;
             border-color: #007bbf;
-            color: white;
-            content: "✓";            
+            content: "✓";
+            color: wheat;        
+            display: flex; 
+            align-items: center;
+            align-content: center;   
             text-align: center;
+            justify-content: center;
             line-height: 20px;
             font-size: 16px;
         }
-        }
+    }
+
     }
   

@@ -19,26 +19,12 @@
   
   <script lang="ts">
   import { defineComponent } from 'vue'
-  import { FormData } from '@/types/types';
   
   export default defineComponent({
-    name: 'InvestedSummary',
     data() {
       return {
-        formData: null as { name: string; birthNumber: string; dateOfBirth: string; idCardNumber: string; investmentAmount: number } | null,
+       formData: JSON.parse(localStorage.getItem('investorData') || '{}') 
       };
-    },
-    mounted() {
-      
-      const investorData = localStorage.getItem('investorData');
-      if (investorData) {
-        this.formData = JSON.parse(investorData);
-      }
-    },
-    methods: {
-      goBack() {
-        this.$router.push({ name: 'Form' }); 
-      },
     },
   });
   </script>
