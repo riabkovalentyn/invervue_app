@@ -28,7 +28,7 @@ const investmentAmount = parseFloat(formData.investmentAmount);
         errors.investmentAmount = 'Hodnota investice musí být kladné číslo.';
     }
 
-const phonePattern = /^[\d\s\-]+$/;
+const phonePattern = /^[\d\s-]+$/;
     if (!phonePattern.test(formData.phoneNumber)) {
         errors.phoneNumber = "Please enter a valid phone number.";
     }

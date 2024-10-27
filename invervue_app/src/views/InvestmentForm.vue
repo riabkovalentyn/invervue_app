@@ -33,9 +33,11 @@ export default defineComponent({
     },
     setup() {
         const store = useStore();
-        const currentStep = ref(1);
-
         const formData = computed(() => store.getters.form);
+        const currentStep = ref(1);
+        const totalSteps = computed(() => store.getters.totalSteps);
+        const loading = computed(() => store.getters.loading);
+        const error = computed(() => store.getters.error);
 
 
         const currentComponent = computed(() => {
@@ -56,28 +58,32 @@ export default defineComponent({
         });
 
         const nextStep = () => {
-            
             if(currentStep.value < 5){
-                return currentStep.value +=1;
+                return currentStep.value++;
+            }else{
+                store.commit('nextStep');
             }
-             else store.commit('nextStep');
         };
 
         const prevStep = () => {
             if(currentStep.value > 1){
-                return currentStep.value -= 1;
-            }else store.commit('prevStep');
-            store.commit('prevStep');
+                return currentStep.value--;
+            }else{
+                store.commit('prevStep');
+            }
         };
 
-        const submitForm = () => {
-            store.commit('nextStep');
+        const submitForm = async() => {
+           await store.dispatch('submitForm');
             alert('Formular odeslan');
         };
         
         return {
-            formData: computed(() => store.getters.form),
+            formData,
             currentStep,
+            totalSteps,
+            loading,
+            error,
             currentComponent,
             nextStep,
             prevStep,

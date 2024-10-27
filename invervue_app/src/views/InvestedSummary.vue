@@ -19,14 +19,25 @@
   
   <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useStore } from 'vuex';
+  import { onMounted } from 'vue';
   
   export default defineComponent({
-    data() {
-      return {
-       formData: JSON.parse(localStorage.getItem('investorData') || '{}') 
+    setup(){
+      const store = useStore();
+      const formData =  store.state.formData;
+        
+      onMounted(async () => {
+        await store.dispatch('fetchFormData');
+      });
+
+
+      return{
+        formData
       };
-    },
-  });
+
+      }
+    });
   </script>
   <style lang="scss">
   @import '../assets/style/style.scss';
