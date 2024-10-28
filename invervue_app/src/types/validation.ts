@@ -1,59 +1,41 @@
-import { FormData, FormErrors } from "./types";
-
-export const sanitizeInput = (input: string): string => {
-    return input.trim().replace(/[^a-zA-Z0-9]/g, "");
-};
-
-export const validateForm = (formData: FormData): FormErrors => {
-    const errors: FormErrors = {};
-
-
-
-if(!formData.firstName || formData.firstName .length < 2) {
-        errors.firstName  = "Name must be at least 2 characters long";
-}
-
-if (!formData.lastName || formData.lastName.length < 2) {
-        errors.lastName = "Last name must be at least 2 characters long.";
-  }
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!emailPattern.test(formData.email)) {
-        errors.email = "Please enter a valid email address";
-    }
-
-
-const investmentAmount = parseFloat(formData.investmentAmount);
-    if (isNaN(investmentAmount) || investmentAmount < 0) {
-        errors.investmentAmount = 'Hodnota investice musí být kladné číslo.';
-    }
-
-const phonePattern = /^[\d\s-]+$/;
-    if (!phonePattern.test(formData.phoneNumber)) {
-        errors.phoneNumber = "Please enter a valid phone number.";
-    }
-
-const birthNumberPattern = /^\d{6}\/\d{4}$/;
-    if (!birthNumberPattern.test(formData.birthNumber)) {
-        errors.birthNumber = "Please enter a valid birth number in format 'XXXXXX/XXXX'.";
-    }
-
-if (!formData.dateOfBirth) {
-        errors.dateOfBirth = "Please enter a valid date of birth.";
-    }
-
-if (!formData.idCardNumber || formData.idCardNumber.length < 6) {
-        errors.idCardNumber = "Please enter a valid ID card number.";
-    }
-
-if (!formData.address || formData.address.length < 5) {
-        errors.address = "Please enter a valid address.";
-    }
-
-const bankAccountPattern = /^\d+$/;
-    if (!bankAccountPattern.test(formData.bankAccountNumber)) {
-        errors.bankAccountNumber = "Please enter a valid bank account number.";
-    }
-
-return errors;
-};
+export const validateInvestmentAmount = (value: string): boolean => {
+    const amount = parseFloat(value);
+    return !isNaN(amount) && amount > 0;
+  };
+  
+  export const validateFirstName = (value: string): boolean => {
+    return /^[a-zA-Zа-яА-Я]{2,50}$/.test(value);
+  };
+  
+  export const validateLastName = (value: string): boolean => {
+    return /^[a-zA-Zа-яА-Я]{2,50}$/.test(value);
+  };
+  
+  export const validatePhoneNumber = (value: string): boolean => {
+    return /^\+?[0-9]{7,15}$/.test(value);
+  };
+  
+  export const validateEmail = (value: string): boolean => {
+    return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+  };
+  
+  export const validateBirthNumber = (value: string): boolean => {
+    return /^\d{6}\/?\d{3,4}$/.test(value);
+  };
+  
+  export const validateDateOfBirth = (value: string): boolean => {
+    return !isNaN(Date.parse(value));
+  };
+  
+  export const validateIdCardNumber = (value: string): boolean => {
+    return /^[A-Za-z0-9]{5,15}$/.test(value);
+  };
+  
+  export const validateAddress = (value: string): boolean => {
+    return value.trim().length > 5;
+  };
+  
+  export const validateBankAccountNumber = (value: string): boolean => {
+    return /^[0-9]{8,20}$/.test(value);
+  };
+  

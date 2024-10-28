@@ -1,19 +1,20 @@
 <template> 
 <div class="osobni-udaje">
     <h2>Krok 1: Osobní údaje</h2>
-    <InputField label="Jmeno" v-model="formData.firstName" placeholder="Jmeno" required />
-    <InputField label="Primeni" v-model="formData.lastName" placeholder="Primeni" required />
-    <InputField label="Telefonni cislo" v-model="formData.phoneNumber" placeholder="Telefonni cislo" required />
-    <InputField label="Emailova adresa" v-model="formData.email" placeholder="Email" required />
+    <InputField label="Jmeno" @blur="formData.firstName" v-model="formData.firstName" placeholder="Jmeno" required />
+    <InputField label="Primeni" @blur="formData.lastName" v-model="formData.lastName" placeholder="Primeni" required />
+    <InputField label="Telefonni cislo" @blur="formData.phoneNumber" v-model="formData.phoneNumber" placeholder="Telefonni cislo" required />
+    <InputField label="Emailova adresa" @blur="formData.email" v-model="formData.email" placeholder="Email" required />
 </div>
 
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref } from 'vue';
+import { FormData, FormErrors } from '../types/types';
 import InputField from '../components/InputField.vue'
-import { FormData } from '../types/types';
+import { validateFirstName, validateLastName, validatePhoneNumber, validateEmail } from '@/types/validation';
+
 
 
 export default defineComponent({
@@ -21,11 +22,36 @@ export default defineComponent({
         InputField,
     },
     setup(){
-        const store = useStore();
-        const formData = store.state.formData as FormData;
+        const formData = ref<FormData>({
+            investmentAmount: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            email: '',
+            birthNumber: '',
+            dateOfBirth: '',
+            idCardNumber: '',
+            address: '',
+            bankAccountNumber: '',
+        })
+        const errors = ref<FormErrors>({});
+        
+        if(!validateFirstName(formData.value.firstName)){
+            console.log('Invalid first name');
+        }
+        if(!validateLastName(formData.value.lastName)){
+            console.log('Invalid last name');
+        }
+        if(!validatePhoneNumber(formData.value.phoneNumber)){
+            console.log('Invalid phone number');
+        }
+        if(!validateEmail(formData.value.email)){
+            console.log('Invalid email');
+        }
 
         return {
             formData,
+            errors,
         };
 
     },

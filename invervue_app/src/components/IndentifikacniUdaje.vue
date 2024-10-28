@@ -8,10 +8,11 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent,  computed } from 'vue';
+    import { defineComponent, ref, } from 'vue';
     import { useStore } from 'vuex';
     import InputField from '@/components/InputField.vue';
-    import { FormData } from '../types/types';
+    import { FormData, FormErrors } from '../types/types';
+    import { validateBirthNumber, validateDateOfBirth, validateIdCardNumber } from '@/types/validation';
 
     export default defineComponent({
         components: {
@@ -19,14 +20,37 @@
         },
         setup() {
             const store = useStore();
-            const formData = store.state.formData as FormData;
-            const consent = computed({
-               get: () => store.getters.form.consent,
-               set: (value: boolean) => store.commit('updateForm', { key: 'consent', value }),
-                   });
+            const formData = ref<FormData>({
+            investmentAmount: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            email: '',
+            birthNumber: '',
+            dateOfBirth: '',
+            idCardNumber: '',
+            address: '',
+            bankAccountNumber: '',
+        })
+        const errors = ref<FormErrors>({});
+
+        if(!validateBirthNumber(formData.value.birthNumber)) {
+            console.log("Neplatné rodne číslo");
+        }
+        if(!validateDateOfBirth(formData.value.dateOfBirth)) {
+            console.log("Neplatné datum narození");
+        }
+        if(!validateIdCardNumber(formData.value.idCardNumber)) {
+            console.log("Neplatné číslo Obcanského Prokazu");
+        }
+
+
+
+
+
             return { 
                 formData,
-                consent
+                errors,
              };
 
                     

@@ -35,9 +35,6 @@ export default createStore<State>({
           state.currentStep--;
       }
       },
-      setConsent(state, consent){
-        state.formData.consent = consent;
-      },
       setLoading(state, loading: boolean) {
         state.loading = loading;
       },
