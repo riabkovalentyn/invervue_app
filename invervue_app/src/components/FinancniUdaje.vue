@@ -1,55 +1,60 @@
-<template>
-    <div class="financni-udaje">
-        <h2>
-            Krok 3: Finanční údaje
-        </h2>
-        <InputField label="Adresa trvaleho pobytu" v-model="form.address" placeholder="Adresa trvaleho pobytu" required />
-        <InputField label="Cislo Bankovniho Uctu" v-model="form.bankAccountNumber" placeholder="Cislo Bankovniho Uctu" required />
-    </div>
-
-</template>
-
-<script lang="ts">
-    import { defineComponent, ref} from 'vue';
-    import { useStore } from 'vuex';
-    import InputField from '../components/InputField.vue';
-    import { FormData, FormErrors } from '../types/types';
-    import { validateAddress, validateBankAccountNumber } from '@/types/validation';
-
+<template> 
+    <FormStep :isValid="isValid" :nextStep="nextStep">
+        <label for="birthNumber">Rodné číslo</label>
+        <input 
+        type="text" 
+        v-model="formStore.formData.birthNumber"  
+        v-validate="'required|regex:/^[0-9]{6}\/[0-9]{4}$/i'"
+        name="birthNumber"
+        >
+        <label for="dateOfBirth">Datum narození</label>
+        <input 
+        type="date" 
+        v-model="formStore.formData.dateOfBirth" 
+        v-validate="'required|date_format:DD-MM-YYYY'"
+        name="dateOfBirth"
+        >
+        <label for="idCardNumber">Číslo občanského průkazu</label>
+        <input 
+        type="text" 
+        v-model="formStore.formData.idCardNumber" 
+        v-validate="'required|regex:/^[0-9A-Za-z]+$/i'"
+        name="idCardNumber"
+        >
+        
+        <p v-if="errors.idCardNumber || errors.dateOfBirth || errors.birthNumber">Vyplňte správné údaje</p>
+    </FormStep>
+    
+    </template>
+    
+    <script lang="ts">
+    import { defineComponent, ref } from 'vue';
+    import { useStepValidation } from '@/composables/useStepValidation';
+    
+    
+    
     export default defineComponent({
         components: {
-            InputField,
+            
         },
-        setup() {
-            const store = useStore();
-            const formData = ref<FormData>({
-                investmentAmount: '',
-                firstName: '',
-                lastName: '',
-                phoneNumber: '',
-                email: '',
-                birthNumber: '',
-                dateOfBirth: '',
-                idCardNumber: '',
-                address: '',
-                bankAccountNumber: '',
-            });
-            const error = ref<FormErrors>({});
-            if(!validateAddress(formData.value.address)){
-                console.log('Invalid address');
-            }
-            if(!validateBankAccountNumber(formData.value.bankAccountNumber)){
-                console.log('Invalid bank account number');
-            }
-
+        setup(){
+            const { formStore, errors, isValid, nextStep  } = useStepValidation();
+    
             return {
-                formData,
-                error,
+                formStore,
+                errors,
+                isValid,
+                nextStep,
             };
-        },    
-    });
-</script>
-
-<style lang="scss" scoped>
-@import '../assets/style/style.scss'
-</style>
+    
+        },
+    
+    })
+    </script>
+    
+    
+    <style lang="scss" scoped>
+    @import '../assets/style/style.scss'
+    
+    </style>
+    

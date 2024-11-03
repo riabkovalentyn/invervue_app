@@ -1,23 +1,16 @@
-import { reactive } from "vue";
-import { FormErrors, FormData } from "@/types/types";
+import { defineRule, configure } from 'vee-validate';
+import { required, email, min, max, numeric, regex } from '@vee-validate/rules';
 
-export const useInvestmentForm = () => {
-    const formData = reactive<FormData>({
-        investmentAmount: "0",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        birthNumber: "",
-        dateOfBirth: "",
-        idCardNumber: "",
-        address: "",
-        bankAccountNumber: "",    
-    });
+export function useValidation() {
+    defineRule("required", required);
+    defineRule("email", email);
+    defineRule("min", min);
+    defineRule("max", max);
+    defineRule("numeric", numeric);
+    defineRule("regex", regex);
 
-    const errors = reactive<FormErrors>({});
+  configure({
+    generateMessage: (ctx) => `${ctx.field} je povinné pole.`,
+  });
+}
 
-    
-
-    return { formData, errors };
-};

@@ -1,63 +1,109 @@
 <template> 
-<div class="osobni-udaje">
-    <h2>Krok 1: Osobní údaje</h2>
-    <InputField label="Jmeno" @blur="formData.firstName" v-model="formData.firstName" placeholder="Jmeno" required />
-    <InputField label="Primeni" @blur="formData.lastName" v-model="formData.lastName" placeholder="Primeni" required />
-    <InputField label="Telefonni cislo" @blur="formData.phoneNumber" v-model="formData.phoneNumber" placeholder="Telefonni cislo" required />
-    <InputField label="Emailova adresa" @blur="formData.email" v-model="formData.email" placeholder="Email" required />
-</div>
+<FormStep :isValid="isValid" :nextStep="nextStep">
+    <label for="investmentAmout">Pravidelná výše investice</label>
+    <input 
+    type="range" 
+    v-model="formStore.formData.investmentAmount" 
+    name="investmentAmout"
+    >
+    <label for="firstName">Jméno</label>
+    <input 
+    type="text" 
+    v-model="formStore.formData.firstName" 
+    name="firstName"
+    >
+    <label for="lastName">Příjmení</label>
+    <input 
+    type="text" 
+    v-model="formStore.formData.lastName" 
+    name="lastName"
+    >
+    <label for="phoneNumber">Telefonní číslo</label>
+    <input 
+    type="text" 
+    v-model="formStore.formData.phoneNumber" 
+    name="phoneNumber"
+    >
+    <label for="email">Email</label>
+    <input 
+    type="text" 
+    v-model="formStore.formData.email"
+    >
+
+    <p v-if="errors.value && Object.keys(errors.value).length >0">Vyplňte správné údaje</p>
+
+</FormStep>
 
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { FormData, FormErrors } from '../types/types';
-import InputField from '../components/InputField.vue'
-import { validateFirstName, validateLastName, validatePhoneNumber, validateEmail } from '@/types/validation';
-
-
+import { useForm, useField } from 'vee-validate';
+import { formStore } from '@/store/formStore';
 
 export default defineComponent({
-    components: {
-        InputField,
-    },
-    setup(){
-        const formData = ref<FormData>({
-            investmentAmount: '',
-            firstName: '',
-            lastName: '',
-            phoneNumber: '',
-            email: '',
-            birthNumber: '',
-            dateOfBirth: '',
-            idCardNumber: '',
-            address: '',
-            bankAccountNumber: '',
-        })
-        const errors = ref<FormErrors>({});
+    setup() {
+        const { errors, validate } = useForm();
         
-        if(!validateFirstName(formData.value.firstName)){
-            console.log('Invalid first name');
-        }
-        if(!validateLastName(formData.value.lastName)){
-            console.log('Invalid last name');
-        }
-        if(!validatePhoneNumber(formData.value.phoneNumber)){
-            console.log('Invalid phone number');
-        }
-        if(!validateEmail(formData.value.email)){
-            console.log('Invalid email');
-        }
+        const { value: investmentAmount, errorMessage: investmentError } = useField(
+            'investmentAmount',
+            'required|numeric|min:100|max:10000'
+        );
+        
+        const { value: firstName, errorMessage: firstNameError } = useField(
+            'firstName',
+            'required|regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/i'
+        );
+        
+        const { value: lastName, errorMessage: lastNameError } = useField(
+            'lastName',
+            'required|regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/i'
+        );
+        
+        const { value: phoneNumber, errorMessage: phoneNumberError } = useField(
+            'phoneNumber',
+            'required|min:9|max:15'
+        );
+        
+        const { value: email, errorMessage: emailError } = useField(
+            'email',
+            'required|email'
+        );
+        
+        const isValid = ref(false);
 
-        return {
-            formData,
-            errors,
+        const validateForm = async () => {
+            await validate();
+            isValid.value = Object.keys(errors.value).length === 0;
         };
 
-    },
+        const nextStep = async () => {
+            await validateForm();
+            if (isValid.value) {
+                formStore.currentStep++;
+            }
+        };    
 
-})
+        return {
+            formStore,
+            errors,
+            isValid,
+            nextStep,
+            investmentAmount,
+            investmentError,
+            firstName,
+            firstNameError,
+            lastName,
+            lastNameError,
+            phoneNumber,
+            phoneNumberError,
+            email,
+            emailError,
+        };
+    },
+});
 </script>
+
 
 
 <style lang="scss" scoped>
