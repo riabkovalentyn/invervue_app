@@ -1,99 +1,73 @@
-.input-field{
-    display: flex;
-    align-items: center ;
-    
-   input{
-    flex: 0 0 150px;
-    margin: 0 0 10px  10px;
-    background-color: #F8F4E3;
-    font-weight: bold;
-    outline: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    &:focus{
-        border-color: #4430f8;
-    }
-    &::placeholder{
-        color:#aaa;
-    }
-}
-    label{
-    flex: 0 0 150px;
-    color: #F8F4E3;
-    font-weight: bold;
-    text-align: right;
-    padding-bottom: 9px;
-    box-sizing: nowrap;
-    } 
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.osobni-udaje, .investment-amount, .indentifikacni-udaje, .summary, .financni-udaje{
-    h2{
-        text-align: center;
-        color: #F8F4E3 ;
-    }
+div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
-.navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-    gap: 20px;
-    button {
-      width: 150px;  
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      &:hover {
-        background-color: #2980b9;
-      }
-    }
-  }
+label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
 
-.custom-checkbox{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    input[type="checkbox"]{
-        display: none;
-        
-    }
-    label{
-        position: relative;
-        padding-left: 30px;
-        cursor: pointer;
-        &::before{
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border: 2px solid #007bbf;
-            border-radius: 3px;
-            background-color: white;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            transition: backgroung-color 0.3 , border-color 0.3s;
-        }
-        input[type="checkbox"]:checked + &::before{
-            background-color: #007bbf;
-            border-color: #007bbf;
-            content: "✓";
-            color: wheat;        
-            display: flex; 
-            align-items: center;
-            align-content: center;   
-            text-align: center;
-            justify-content: center;
-            line-height: 20px;
-            font-size: 16px;
-        }
-    }
+input[type="text"],
+input[type="range"] {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
 
-    }
-  
+input[type="text"]:focus,
+input[type="range"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+span[v-if] {
+  color: #d9534f;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
+
+button[type="button"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="button"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+p[v-if] {
+  color: #d9534f;
+  font-size: 1em;
+  text-align: center;
+  margin-top: 10px;
+}

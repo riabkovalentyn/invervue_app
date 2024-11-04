@@ -9,7 +9,6 @@
 import InvestmentForm from './views/InvestmentForm.vue';
 import { defineComponent } from 'vue';
 
-
 export default defineComponent({
   components: {
     InvestmentForm
@@ -19,4 +18,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+
 </style>

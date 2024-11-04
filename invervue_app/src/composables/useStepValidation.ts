@@ -7,7 +7,7 @@ function isCallableRule(rule: unknown): rule is ((value: unknown, params?: any) 
     return typeof rule === 'function';
 }
 
-export function useStepValidation(){
+export function useStepValidation() {
     (Object.keys(rules) as Array<keyof typeof rules>).forEach((rule) => {
         const ruleFn = rules[rule];
         if (isCallableRule(ruleFn)) {
@@ -15,21 +15,33 @@ export function useStepValidation(){
         }
     });
 
-    const { errors, validate} = useForm();
-    const isValid = ref(false);
-    const validateForm = async ()=> {
-        await validate();
-        isValid.value = Object.keys(errors).length === 0;
-    }
+    const { errors, validate } = useForm(); 
+    const isValid = ref(false); 
+
+    const validateForm = async () => {
+        await validate(); 
+        isValid.value = Object.keys(errors.value).length === 0; 
+    };
+
     const nextStep = async () => {
         await validateForm();
-        if(isValid.value){
-            formStore.currentStep++;
+        if (isValid.value) {
+            formStore.currentStep++; 
         }
     };
-    const previusStep = () => {
-        formStore.currentStep--;
-    };
-    return { formStore, errors, validateForm, isValid, nextStep, previusStep };
 
+    const previousStep = () => {
+        if (formStore.currentStep > 0) { 
+            formStore.currentStep--; 
+        }
+    };
+
+    return { 
+        formStore, 
+        errors, 
+        validateForm, 
+        isValid, 
+        nextStep, 
+        previousStep 
+    };
 }

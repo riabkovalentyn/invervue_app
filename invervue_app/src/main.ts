@@ -1,7 +1,6 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import './assets/style/reset.scss'
+import { createApp } from 'vue';
+import App from './App.vue';
+import './assets/style/reset.scss';
 
-
-createApp(App)
-    .mount('#app')
+const app = createApp(App);
+app.mount('#app');
